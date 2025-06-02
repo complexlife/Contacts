@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پرتال مخاطبین</title>
+    <!-- Vazir Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Heroicons -->
+    <script src="https://unpkg.com/@heroicons/v2/24/outline/esm/index.js"></script>
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+        }
+        .contact-card {
+            transition: all 0.3s ease;
+            border-right: 4px solid #3B82F6;
+        }
+        .contact-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .phone-number {
+            position: relative;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+        }
+        .phone-number .actions {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .phone-numbers-container {
+            position: relative;
+        }
+        .phonebook-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .phonebook-badge.personal {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+        .phonebook-badge.work {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        .phonebook-badge.family {
+            background-color: #fce7f3;
+            color: #be185d;
+        }
+        .phonebook-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            color: #0369a1;
+            font-weight: 500;
+            background: none;
+            border-radius: 0;
+            padding: 0;
+        }
+        .category-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .category-tag.family {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+        .category-tag.friends {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        .category-tag.work {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        .info-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0;
+            padding: 0.75rem;
+            background-color: #f9fafb;
+            border-radius: 0.5rem;
+        }
+        .info-section .divider {
+            width: 1px;
+            height: 1.5rem;
+            background: #e5e7eb;
+            margin: 0 1.25rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-4">
+    <div class="container mx-auto">
+        <!-- Top Action Bar -->
+        <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
+            <div class="w-full md:w-auto flex-1">
+                <div class="relative">
+                    <input type="text" placeholder="جستجوی شماره یا نام مخاطب" class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <svg class="w-5 h-5 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-3 items-center">
+                <div class="relative group">
+                    <button class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2">
+                        <span>فیلتر دفترچه تلفن</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block z-50">
+                        <div class="py-2">
+                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" class="phonebook-filter" value="personal" class="mr-2">
+                                <span class="phonebook-label">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                                    </svg>
+                                    شخصی
+                                </span>
+                            </label>
+                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" class="phonebook-filter" value="work" class="mr-2">
+                                <span class="phonebook-label">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                                    </svg>
+                                    کاری
+                                </span>
+                            </label>
+                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" class="phonebook-filter" value="family" class="mr-2">
+                                <span class="phonebook-label">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                                    </svg>
+                                    خانوادگی
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <button class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2">
+                        <span>فیلتر دسته‌بندی</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block z-50">
+                        <div class="py-2">
+                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" class="category-filter" value="family" class="mr-2">
+                                <span class="category-tag family">خانواده</span>
+                            </label>
+                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" class="category-filter" value="friends" class="mr-2">
+                                <span class="category-tag friends">دوستان</span>
+                            </label>
+                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" class="category-filter" value="work" class="mr-2">
+                                <span class="category-tag work">کاری</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    افزودن مخاطب جدید
+                </button>
+                <button class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    مدیریت دفترچه تلفن
+                </button>
+                <div class="flex gap-2">
+                    <button class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                        </svg>
+                        وارد کردن
+                    </button>
+                    <button class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        خروجی گرفتن
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- View Toggle -->
+        <div class="flex justify-end mb-6">
+            <div class="inline-flex rounded-lg border border-gray-300">
+                <button id="tableViewBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg">جدول</button>
+                <button id="cardViewBtn" class="px-4 py-2 text-gray-700 hover:bg-gray-50">کارت</button>
+            </div>
+        </div>
+
+        <!-- Table View -->
+        <div id="tableView" class="bg-white rounded-lg shadow overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">نام</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">نام خانوادگی</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">شماره‌ها</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">دفترچه تلفن</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">دسته‌بندی‌ها</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap">علی</td>
+                        <td class="px-6 py-4 whitespace-nowrap">محمدی</td>
+                        <td class="px-6 py-4">
+                            <div class="phone-numbers-container">
+                                <div class="flex flex-col gap-2">
+                                    <div class="phone-number">
+                                        <div class="flex items-center gap-3">
+                                            <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                            </svg>
+                                            <span>09123456789</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="phonebook-label">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                                </svg>
+                                شخصی
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="category-tag family">خانواده</span>
+                                <span class="category-tag friends">دوستان</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex gap-2 justify-end">
+                                <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+                                <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                    </svg>
+                                </button>
+                                <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                    </svg>
+                                </button>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                    </svg>
+                                </button>
+                                <div class="relative">
+                                    <button class="text-gray-600 hover:text-gray-800 more-options-btn">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="more-options-menu hidden absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                        <div class="py-1">
+                                            <button class="delete-contact text-red-600 hover:bg-red-50 block w-full text-right px-4 py-2 text-sm">
+                                                حذف مخاطب
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap">مریم</td>
+                        <td class="px-6 py-4 whitespace-nowrap">احمدی</td>
+                        <td class="px-6 py-4">
+                            <div class="phone-numbers-container">
+                                <div class="phone-number">
+                                    <div class="flex items-center gap-3">
+                                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                        </svg>
+                                        <span>09187654321</span>
+                                    </div>
+                                </div>
+                                <div class="phone-number hidden">
+                                    <div class="flex items-center gap-3">
+                                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                        </svg>
+                                        <span>02112345678</span>
+                                    </div>
+                                </div>
+                                <button class="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-1 mt-1 show-more-btn">
+                                    <span>نمایش بیشتر</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="phonebook-label">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                                </svg>
+                                کاری
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="category-tag work">کاری</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex gap-2 justify-end">
+                                <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+                                <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                    </svg>
+                                </button>
+                                <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                    </svg>
+                                </button>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                    </svg>
+                                </button>
+                                <div class="relative">
+                                    <button class="text-gray-600 hover:text-gray-800 more-options-btn">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="more-options-menu hidden absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                        <div class="py-1">
+                                            <button class="delete-contact text-red-600 hover:bg-red-50 block w-full text-right px-4 py-2 text-sm">
+                                                حذف مخاطب
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4 whitespace-nowrap">رضا</td>
+                        <td class="px-6 py-4 whitespace-nowrap">کریمی</td>
+                        <td class="px-6 py-4">
+                            <div class="phone-numbers-container">
+                                <div class="phone-number">
+                                    <div class="flex items-center gap-3">
+                                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                        </svg>
+                                        <span>09123456789</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="phonebook-label">
+                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                                </svg>
+                                خانوادگی
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex flex-wrap gap-2">
+                                <span class="category-tag family">خانواده</span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex gap-2 justify-end">
+                                <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+                                <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                    </svg>
+                                </button>
+                                <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                    </svg>
+                                </button>
+                                <button class="text-blue-600 hover:text-blue-800">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                    </svg>
+                                </button>
+                                <div class="relative">
+                                    <button class="text-gray-600 hover:text-gray-800 more-options-btn">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="more-options-menu hidden absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                        <div class="py-1">
+                                            <button class="delete-contact text-red-600 hover:bg-red-50 block w-full text-right px-4 py-2 text-sm">
+                                                حذف مخاطب
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Card View -->
+        <div id="cardView" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Sample Contact Card 1: فقط یک شماره -->
+            <div class="contact-card bg-white rounded-lg p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <span class="text-blue-600 font-semibold">ع</span>
+                        </div>
+                        <h3 class="text-lg font-semibold">علی محمدی</h3>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                        </button>
+                        <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                            </svg>
+                        </button>
+                        <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                            </svg>
+                        </button>
+                        <div class="flex gap-2 mr-2">
+                            <button class="text-blue-600 hover:text-blue-800" title="ویرایش">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                            </button>
+                            <div class="relative">
+                                <button class="text-gray-600 hover:text-gray-800 more-options-btn">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                    </svg>
+                                </button>
+                                <div class="more-options-menu hidden absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                    <div class="py-1">
+                                        <button class="delete-contact text-red-600 hover:bg-red-50 block w-full text-right px-4 py-2 text-sm">
+                                            حذف مخاطب
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <div class="phone-numbers-container">
+                            <div class="phone-number">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                    <span>09123456789</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-section">
+                        <span class="phonebook-label">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                            </svg>
+                            شخصی
+                        </span>
+                        <span class="divider"></span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="category-tag family">خانواده</span>
+                            <span class="category-tag friends">دوستان</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Contact Card 2: چند شماره با دکمه نمایش بیشتر -->
+            <div class="contact-card bg-white rounded-lg p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <span class="text-green-600 font-semibold">م</span>
+                        </div>
+                        <h3 class="text-lg font-semibold">مریم احمدی</h3>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                        </button>
+                        <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                            </svg>
+                        </button>
+                        <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                            </svg>
+                        </button>
+                        <div class="flex gap-2 mr-2">
+                            <button class="text-blue-600 hover:text-blue-800" title="ویرایش">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                            </button>
+                            <div class="relative">
+                                <button class="text-gray-600 hover:text-gray-800 more-options-btn">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                    </svg>
+                                </button>
+                                <div class="more-options-menu hidden absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                    <div class="py-1">
+                                        <button class="delete-contact text-red-600 hover:bg-red-50 block w-full text-right px-4 py-2 text-sm">
+                                            حذف مخاطب
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <div class="phone-numbers-container">
+                            <div class="phone-number">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                    <span>09187654321</span>
+                                </div>
+                            </div>
+                            <div class="phone-number hidden">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                    <span>02112345678</span>
+                                </div>
+                            </div>
+                            <button class="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-1 mt-1 show-more-btn">
+                                <span>نمایش بیشتر</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="info-section">
+                        <span class="phonebook-label">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                            </svg>
+                            کاری
+                        </span>
+                        <span class="divider"></span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="category-tag work">کاری</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sample Contact Card 3: فقط یک شماره -->
+            <div class="contact-card bg-white rounded-lg p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                            <span class="text-purple-600 font-semibold">ر</span>
+                        </div>
+                        <h3 class="text-lg font-semibold">رضا کریمی</h3>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                        </button>
+                        <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                            </svg>
+                        </button>
+                        <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                            </svg>
+                        </button>
+                        <div class="flex gap-2 mr-2">
+                            <button class="text-blue-600 hover:text-blue-800" title="ویرایش">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                            </button>
+                            <div class="relative">
+                                <button class="text-gray-600 hover:text-gray-800 more-options-btn">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                                    </svg>
+                                </button>
+                                <div class="more-options-menu hidden absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                    <div class="py-1">
+                                        <button class="delete-contact text-red-600 hover:bg-red-50 block w-full text-right px-4 py-2 text-sm">
+                                            حذف مخاطب
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <div class="phone-numbers-container">
+                            <div class="phone-number">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                    <span>09123456789</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-section">
+                        <span class="phonebook-label">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                            </svg>
+                            خانوادگی
+                        </span>
+                        <span class="divider"></span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="category-tag family">خانواده</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // View Toggle Functionality
+        const tableViewBtn = document.getElementById('tableViewBtn');
+        const cardViewBtn = document.getElementById('cardViewBtn');
+        const tableView = document.getElementById('tableView');
+        const cardView = document.getElementById('cardView');
+
+        tableViewBtn.addEventListener('click', () => {
+            tableView.classList.remove('hidden');
+            cardView.classList.add('hidden');
+            tableViewBtn.classList.remove('text-gray-700', 'hover:bg-gray-50');
+            tableViewBtn.classList.add('bg-blue-600', 'text-white');
+            cardViewBtn.classList.remove('bg-blue-600', 'text-white');
+            cardViewBtn.classList.add('text-gray-700', 'hover:bg-gray-50');
+        });
+
+        cardViewBtn.addEventListener('click', () => {
+            cardView.classList.remove('hidden');
+            tableView.classList.add('hidden');
+            cardViewBtn.classList.remove('text-gray-700', 'hover:bg-gray-50');
+            cardViewBtn.classList.add('bg-blue-600', 'text-white');
+            tableViewBtn.classList.remove('bg-blue-600', 'text-white');
+            tableViewBtn.classList.add('text-gray-700', 'hover:bg-gray-50');
+        });
+
+        // Show More/Less Functionality
+        const showMoreBtns = document.querySelectorAll('.show-more-btn');
+        showMoreBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const container = this.closest('.phone-numbers-container');
+                const hiddenNumbers = container.querySelectorAll('.phone-number.hidden');
+                const isExpanded = btn.querySelector('span').textContent === 'نمایش کمتر';
+                
+                if (isExpanded) {
+                    // Collapse - hide all numbers except the first one
+                    const allNumbers = container.querySelectorAll('.phone-number');
+                    allNumbers.forEach((num, index) => {
+                        if (index === 0) {
+                            num.classList.remove('hidden');
+                        } else {
+                            num.classList.add('hidden');
+                        }
+                    });
+                    btn.querySelector('span').textContent = 'نمایش بیشتر';
+                    btn.querySelector('svg').style.transform = 'rotate(0deg)';
+                } else {
+                    // Expand - show all numbers
+                    hiddenNumbers.forEach(num => {
+                        num.classList.remove('hidden');
+                    });
+                    btn.querySelector('span').textContent = 'نمایش کمتر';
+                    btn.querySelector('svg').style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // More Options Menu
+        const moreOptionsBtns = document.querySelectorAll('.more-options-btn');
+        moreOptionsBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const menu = this.nextElementSibling;
+                menu.classList.toggle('hidden');
+            });
+        });
+
+        // Close menus when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.more-options-btn')) {
+                document.querySelectorAll('.more-options-menu').forEach(menu => {
+                    menu.classList.add('hidden');
+                });
+            }
+        });
+
+        // Delete Contact Functionality
+        const deleteButtons = document.querySelectorAll('.delete-contact');
+        deleteButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('آیا از حذف این مخاطب اطمینان دارید؟')) {
+                    const contactCard = this.closest('.contact-card, tr');
+                    contactCard.remove();
+                }
+            });
+        });
+
+        // Filter Functionality
+        const phonebookFilters = document.querySelectorAll('.phonebook-filter');
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        const contactRows = document.querySelectorAll('tbody tr');
+        const contactCards = document.querySelectorAll('.contact-card');
+
+        function applyFilters() {
+            const selectedPhonebooks = Array.from(phonebookFilters)
+                .filter(filter => filter.checked)
+                .map(filter => filter.value);
+            
+            const selectedCategories = Array.from(categoryFilters)
+                .filter(filter => filter.checked)
+                .map(filter => filter.value);
+
+            // Filter table rows
+            contactRows.forEach(row => {
+                const phonebookLabel = row.querySelector('.phonebook-label').textContent.trim();
+                const categoryTags = Array.from(row.querySelectorAll('.category-tag'))
+                    .map(tag => tag.textContent.trim());
+                
+                const matchesPhonebook = selectedPhonebooks.length === 0 || selectedPhonebooks.includes(phonebookLabel);
+                const matchesCategory = selectedCategories.length === 0 || categoryTags.some(tag => selectedCategories.includes(tag));
+                
+                row.style.display = matchesPhonebook && matchesCategory ? '' : 'none';
+            });
+
+            // Filter contact cards
+            contactCards.forEach(card => {
+                const phonebookLabel = card.querySelector('.phonebook-label').textContent.trim();
+                const categoryTags = Array.from(card.querySelectorAll('.category-tag'))
+                    .map(tag => tag.textContent.trim());
+                
+                const matchesPhonebook = selectedPhonebooks.length === 0 || selectedPhonebooks.includes(phonebookLabel);
+                const matchesCategory = selectedCategories.length === 0 || categoryTags.some(tag => selectedCategories.includes(tag));
+                
+                card.style.display = matchesPhonebook && matchesCategory ? '' : 'none';
+            });
+        }
+
+        phonebookFilters.forEach(filter => {
+            filter.addEventListener('change', applyFilters);
+        });
+
+        categoryFilters.forEach(filter => {
+            filter.addEventListener('change', applyFilters);
+        });
+
+        // Pin, Favorite, and Block Functionality
+        const pinButtons = document.querySelectorAll('button[title="پین کردن"]');
+        const favoriteButtons = document.querySelectorAll('button[title="افزودن به علاقه‌مندی‌ها"]');
+        const blockButtons = document.querySelectorAll('button[title="مسدود کردن"]');
+
+        pinButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('text-yellow-500');
+                this.classList.toggle('text-yellow-600');
+            });
+        });
+
+        favoriteButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('text-gray-400');
+                this.classList.toggle('text-yellow-500');
+            });
+        });
+
+        blockButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('text-red-500');
+                this.classList.toggle('text-red-600');
+            });
+        });
+    </script>
+</body>
+</html> 
