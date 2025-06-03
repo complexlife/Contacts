@@ -104,119 +104,146 @@
 </head>
 <body class="bg-gray-50 p-4">
     <div class="container mx-auto">
-        <!-- Top Action Bar -->
-        <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
-            <div class="w-full md:w-auto flex-1">
-                <div class="relative">
-                    <input type="text" placeholder="جستجوی شماره یا نام مخاطب" class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <svg class="w-5 h-5 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
+        <!-- Top Section based on Image -->
+        <div class="flex flex-col gap-4 mb-6">
+            <!-- Top Row: Title and Main Buttons -->
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-semibold text-gray-800">مخاطبین</h2>
+                <div class="flex gap-2">
+                    <button class="border border-blue-600 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 flex items-center gap-2">
+                        مدیریت دفترچه تلفن
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        افزودن شماره مخاطب
+                    </button>
                 </div>
             </div>
-            <div class="flex flex-wrap gap-3 items-center">
-                <div class="relative group">
-                    <button class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2">
-                        <span>فیلتر دفترچه تلفن</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+
+            <!-- Second Row: Status Filters, Phonebook/Category Filters, and Search -->
+            <div class="flex flex-wrap items-center gap-3">
+                <!-- Search Bar -->
+                <div class="flex-1 min-w-[200px] mr-auto">
+                    <div class="relative">
+                        <input type="text" placeholder="برای جستجوی شماره، شماره را بدون صفر وارد کنید" class="w-full px-4 py-2 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <svg class="w-5 h-5 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
-                    </button>
-                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block z-50">
-                        <div class="py-2">
-                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
-                                <input type="checkbox" class="phonebook-filter" value="personal" class="mr-2">
-                                <span class="phonebook-label">
-                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
-                                    </svg>
-                                    شخصی
-                                </span>
-                            </label>
-                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
-                                <input type="checkbox" class="phonebook-filter" value="work" class="mr-2">
-                                <span class="phonebook-label">
-                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
-                                    </svg>
-                                    کاری
-                                </span>
-                            </label>
-                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
-                                <input type="checkbox" class="phonebook-filter" value="family" class="mr-2">
-                                <span class="phonebook-label">
-                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
-                                    </svg>
-                                    خانوادگی
-                                </span>
-                            </label>
-                        </div>
                     </div>
                 </div>
-                <div class="relative group">
-                    <button class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2">
-                        <span>فیلتر دسته‌بندی</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
-                    <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block z-50">
-                        <div class="py-2">
-                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
-                                <input type="checkbox" class="category-filter" value="family" class="mr-2">
-                                <span class="category-tag family">خانواده</span>
-                            </label>
-                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
-                                <input type="checkbox" class="category-filter" value="friends" class="mr-2">
-                                <span class="category-tag friends">دوستان</span>
-                            </label>
-                            <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
-                                <input type="checkbox" class="category-filter" value="work" class="mr-2">
-                                <span class="category-tag work">کاری</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                    افزودن مخاطب جدید
-                </button>
-                <button class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                    </svg>
-                    مدیریت دفترچه تلفن
-                </button>
+
+                <!-- Phonebook and Category Filters -->
                 <div class="flex gap-2">
-                    <button class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center gap-2 import-btn">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                    <div class="relative group">
+                        <button class="px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2">
+                            <span>همه دفترچه تلفن</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <!-- Existing Checkbox Filter Content -->
+                        <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block z-50">
+                            <div class="py-2">
+                                <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" class="phonebook-filter" value="personal" class="mr-2">
+                                    <span class="phonebook-label">
+                                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                                        </svg>
+                                        شخصی
+                                    </span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" class="phonebook-filter" value="work" class="mr-2">
+                                    <span class="phonebook-label">
+                                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                                        </svg>
+                                        کاری
+                                    </span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" class="phonebook-filter" value="family" class="mr-2">
+                                    <span class="phonebook-label">
+                                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2zM16 2a2 2 0 012 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2m-2-2a2 2 0 00-2 2" />
+                                        </svg>
+                                        خانوادگی
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <button class="px-3 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center gap-2">
+                            <span>دسته‌بندی مخاطب</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <!-- Existing Checkbox Filter Content -->
+                        <div class="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block z-50">
+                            <div class="py-2">
+                                <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" class="category-filter" value="family" class="mr-2">
+                                    <span class="category-tag family">خانواده</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" class="category-filter" value="friends" class="mr-2">
+                                    <span class="category-tag friends">دوستان</span>
+                                </label>
+                                <label class="flex items-center px-4 py-2 hover:bg-gray-50 cursor-pointer">
+                                    <input type="checkbox" class="category-filter" value="work" class="mr-2">
+                                    <span class="category-tag work">کاری</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Filters -->
+                <div class="flex gap-2 border border-gray-300 rounded-lg p-1">
+                    <button class="status-filter-btn px-3 py-1 rounded-md flex items-center gap-2 hover:bg-gray-50" data-status="pinned">
+                        <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                         </svg>
-                        وارد کردن
+                        <span>پین شده‌ها</span>
                     </button>
-                    <button class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-50 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    <button class="status-filter-btn px-3 py-1 rounded-md flex items-center gap-2 hover:bg-gray-50" data-status="blocked">
+                        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
                         </svg>
-                        خروجی گرفتن
+                        <span>مسدود شده‌ها</span>
                     </button>
+                    <button class="status-filter-btn px-3 py-1 rounded-md flex items-center gap-2 hover:bg-gray-50" data-status="favorite">
+                        <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                        </svg>
+                        <span>علاقه‌مندی‌ها</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- View Toggle -->
+            <div class="flex justify-end mb-6">
+                <div class="inline-flex rounded-lg border border-gray-300">
+                    <button id="tableViewBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg">جدول</button>
+                    <button id="cardViewBtn" class="px-4 py-2 text-gray-700 hover:bg-gray-50">کارت</button>
                 </div>
             </div>
         </div>
 
-        <!-- View Toggle -->
-        <div class="flex justify-end mb-6">
-            <div class="inline-flex rounded-lg border border-gray-300">
-                <button id="tableViewBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg">جدول</button>
-                <button id="cardViewBtn" class="px-4 py-2 text-gray-700 hover:bg-gray-50">کارت</button>
-            </div>
-        </div>
+        <!-- Removed previous filter/action bar -->
+        
 
         <!-- Table View -->
-        <div id="tableView" class="bg-white rounded-lg shadow overflow-hidden">
+        <div id="tableView" class="bg-white rounded-lg shadow overflow-hidden mb-6">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
@@ -263,18 +290,27 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex gap-2 justify-end">
                                 <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 pin-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5 pin-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                                     </svg>
                                 </button>
                                 <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 block-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5 block-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
                                     </svg>
                                 </button>
                                 <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 favorite-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5 favorite-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
                                     </svg>
                                 </button>
                                 <button class="text-blue-600 hover:text-blue-800">
@@ -344,18 +380,27 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex gap-2 justify-end">
                                 <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 pin-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5 pin-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                                     </svg>
                                 </button>
                                 <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 block-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5 block-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
                                     </svg>
                                 </button>
                                 <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 favorite-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5 favorite-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
                                     </svg>
                                 </button>
                                 <button class="text-blue-600 hover:text-blue-800">
@@ -411,18 +456,27 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex gap-2 justify-end">
                                 <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 pin-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5 pin-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                                     </svg>
                                 </button>
                                 <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 block-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5 block-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
                                     </svg>
                                 </button>
                                 <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-5 h-5 favorite-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                    </svg>
+                                    <svg class="w-5 h-5 favorite-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
                                     </svg>
                                 </button>
                                 <button class="text-blue-600 hover:text-blue-800">
@@ -464,18 +518,27 @@
                     </div>
                     <div class="flex gap-2">
                         <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 pin-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 pin-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                             </svg>
                         </button>
                         <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 block-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                            </svg>
+                            <svg class="w-5 h-5 block-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
                             </svg>
                         </button>
                         <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 favorite-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 favorite-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
                             </svg>
                         </button>
                         <div class="flex gap-2 mr-2">
@@ -541,18 +604,27 @@
                     </div>
                     <div class="flex gap-2">
                         <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 pin-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 pin-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                             </svg>
                         </button>
                         <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 block-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                            </svg>
+                            <svg class="w-5 h-5 block-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
                             </svg>
                         </button>
                         <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 favorite-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 favorite-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
                             </svg>
                         </button>
                         <div class="flex gap-2 mr-2">
@@ -631,18 +703,27 @@
                     </div>
                     <div class="flex gap-2">
                         <button class="text-yellow-500 hover:text-yellow-600" title="پین کردن">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 pin-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 pin-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                             </svg>
                         </button>
                         <button class="text-red-500 hover:text-red-600" title="مسدود کردن">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 block-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                            </svg>
+                            <svg class="w-5 h-5 block-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
                             </svg>
                         </button>
                         <button class="text-gray-400 hover:text-gray-500" title="افزودن به علاقه‌مندی‌ها">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 favorite-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 favorite-icon-active hidden" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
                             </svg>
                         </button>
                         <div class="flex gap-2 mr-2">
@@ -949,6 +1030,10 @@
 
         pinButtons.forEach(btn => {
             btn.addEventListener('click', function() {
+                const pinIcon = this.querySelector('.pin-icon');
+                const pinIconActive = this.querySelector('.pin-icon-active');
+                pinIcon.classList.toggle('hidden');
+                pinIconActive.classList.toggle('hidden');
                 this.classList.toggle('text-yellow-500');
                 this.classList.toggle('text-yellow-600');
             });
@@ -956,6 +1041,10 @@
 
         favoriteButtons.forEach(btn => {
             btn.addEventListener('click', function() {
+                const favoriteIcon = this.querySelector('.favorite-icon');
+                const favoriteIconActive = this.querySelector('.favorite-icon-active');
+                favoriteIcon.classList.toggle('hidden');
+                favoriteIconActive.classList.toggle('hidden');
                 this.classList.toggle('text-gray-400');
                 this.classList.toggle('text-yellow-500');
             });
@@ -963,6 +1052,10 @@
 
         blockButtons.forEach(btn => {
             btn.addEventListener('click', function() {
+                const blockIcon = this.querySelector('.block-icon');
+                const blockIconActive = this.querySelector('.block-icon-active');
+                blockIcon.classList.toggle('hidden');
+                blockIconActive.classList.toggle('hidden');
                 this.classList.toggle('text-red-500');
                 this.classList.toggle('text-red-600');
             });
@@ -1114,6 +1207,74 @@
                 exportModal.classList.add('hidden');
                 exportSuccessMessage.classList.add('hidden');
             }, 2000);
+        });
+
+        // Status Filter Functionality
+        const statusFilterBtns = document.querySelectorAll('.status-filter-btn');
+        let activeStatusFilter = null;
+
+        statusFilterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const status = this.dataset.status;
+                
+                // Toggle active state
+                if (activeStatusFilter === status) {
+                    // Remove active state
+                    this.classList.remove('bg-gray-100');
+                    activeStatusFilter = null;
+                    // Show all contacts
+                    contactRows.forEach(row => row.style.display = '');
+                    contactCards.forEach(card => card.style.display = '');
+                } else {
+                    // Remove active state from other buttons
+                    statusFilterBtns.forEach(b => b.classList.remove('bg-gray-100'));
+                    // Add active state to clicked button
+                    this.classList.add('bg-gray-100');
+                    activeStatusFilter = status;
+                    
+                    // Filter contacts based on status
+                    contactRows.forEach(row => {
+                        const isPinned = row.querySelector('button[title="پین کردن"]').classList.contains('text-yellow-600');
+                        const isBlocked = row.querySelector('button[title="مسدود کردن"]').classList.contains('text-red-600');
+                        const isFavorite = row.querySelector('button[title="افزودن به علاقه‌مندی‌ها"]').classList.contains('text-yellow-500');
+                        
+                        let shouldShow = false;
+                        switch(status) {
+                            case 'pinned':
+                                shouldShow = isPinned;
+                                break;
+                            case 'blocked':
+                                shouldShow = isBlocked;
+                                break;
+                            case 'favorite':
+                                shouldShow = isFavorite;
+                                break;
+                        }
+                        row.style.display = shouldShow ? '' : 'none';
+                    });
+
+                    // Filter contact cards
+                    contactCards.forEach(card => {
+                        const isPinned = card.querySelector('button[title="پین کردن"]').classList.contains('text-yellow-600');
+                        const isBlocked = card.querySelector('button[title="مسدود کردن"]').classList.contains('text-red-600');
+                        const isFavorite = card.querySelector('button[title="افزودن به علاقه‌مندی‌ها"]').classList.contains('text-yellow-500');
+                        
+                        let shouldShow = false;
+                        switch(status) {
+                            case 'pinned':
+                                shouldShow = isPinned;
+                                break;
+                            case 'blocked':
+                                shouldShow = isBlocked;
+                                break;
+                            case 'favorite':
+                                shouldShow = isFavorite;
+                                break;
+                        }
+                        card.style.display = shouldShow ? '' : 'none';
+                    });
+                }
+            });
         });
     </script>
 </body>
